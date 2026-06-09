@@ -1,1 +1,1434 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title id="pg-title">নাঈমার আচার</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{hind:['"Hind Siliguri"','sans-serif']},
+colors:{brand:{50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',
+400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c',800:'#9a3412',900:'#7c2d12'}}}}};
+</script>
+
+<style>
+:root{
+  --pr:#ea580c; --prl:#fb923c; --prd:#c2410c; --ac:#fbbf24;
+  --bg:#0d0803; --bg2:#180e05; --bg3:#221508;
+  --text:#f5efe8; --muted:#9e8870;
+  --glass:rgba(255,255,255,0.055);
+  --gb:rgba(255,255,255,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--pr);border-radius:4px}
+
+/* Glass */
+.glass{background:var(--glass);border:1px solid var(--gb);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+
+/* Gradient text */
+.gt{background:linear-gradient(135deg,var(--ac),var(--prl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Glow button */
+.gbtn{background:linear-gradient(135deg,var(--pr),var(--prd));box-shadow:0 0 22px rgba(234,88,12,.45);transition:all .3s;position:relative;overflow:hidden;border:none;cursor:pointer}
+.gbtn:hover{transform:translateY(-2px);box-shadow:0 0 38px rgba(234,88,12,.7)}
+.gbtn:active{transform:translateY(0)}
+.gbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:.3s}
+.gbtn:hover::after{opacity:1}
+
+/* Navbar */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:.3s}
+#nav.scrolled{background:rgba(13,8,3,.93);backdrop-filter:blur(20px);box-shadow:0 2px 30px rgba(234,88,12,.18)}
+
+/* Notice bar — navbar নিচে fixed */
+#notice-bar{
+  position:fixed;
+  top:64px;          /* navbar height */
+  left:0; right:0;
+  z-index:998;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:7px 0;
+  font-size:0.78rem;
+  color:#fff;
+  letter-spacing:0.025em;
+}
+
+/* ─── NOTICE TICKER (smooth marquee) ─── */
+@keyframes marquee{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+#notice-bar {
+  position: relative;
+  z-index: 999;
+  font-size: 0.78rem;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+#ticker-inner {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+#ticker-inner:hover { animation-play-state: paused; }
+
+/* ─── HERO IMAGE SLIDER ─── */
+.hslide-track{display:flex;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.hslide{min-width:100%;position:relative}
+.hslide img{width:100%;height:100%;object-fit:cover;border-radius:1.25rem}
+
+/* ─── TEXT SLIDER ─── */
+.tslide-item h1 { word-break: keep-all; overflow-wrap: break-word; }
+#hero-text-track { transition: transform .75s cubic-bezier(.4,0,.2,1); }
+
+/* Float */
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(1.5deg)}}
+.float{animation:float 4s ease-in-out infinite}
+
+/* Fade up */
+.fu{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s}
+.fu.vis{opacity:1;transform:none}
+
+/* Product card */
+.pcard{transition:transform .35s,box-shadow .35s}
+.pcard:hover{transform:translateY(-8px);box-shadow:0 22px 55px rgba(234,88,12,.28)}
+.pcard:hover img{transform:scale(1.08)}
+.pcard img{transition:transform .4s}
+
+/* Mesh bg */
+.mesh{background:
+  radial-gradient(ellipse 80% 55% at 72% 38%,rgba(234,88,12,.18) 0%,transparent 60%),
+  radial-gradient(ellipse 55% 50% at 18% 65%,rgba(251,191,36,.10) 0%,transparent 55%),
+  var(--bg)}
+
+/* Modal */
+#moverlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem}
+#moverlay.open{display:flex}
+.mbox{background:var(--bg2);border:1px solid rgba(234,88,12,.3);border-radius:1.5rem;width:100%;max-width:530px;max-height:93vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px rgba(234,88,12,.15);animation:minIn .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes minIn{from{opacity:0;transform:scale(.88) translateY(28px)}to{opacity:1;transform:none}}
+.mbox::-webkit-scrollbar{width:4px}.mbox::-webkit-scrollbar-thumb{background:var(--pr);border-radius:4px}
+
+/* Form elements */
+.fi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);border-radius:.6rem;padding:.65rem 1rem;width:100%;font-family:'Hind Siliguri',sans-serif;font-size:.95rem;transition:.25s;outline:none}
+.fi:focus{border-color:var(--pr);box-shadow:0 0 0 3px rgba(234,88,12,.2)}
+.fi option{background:var(--bg2)}
+
+/* Radio pill */
+.rpill input[type=radio]{display:none}
+.rpill label{cursor:pointer;display:block;padding:.55rem 1.1rem;border:1px solid rgba(255,255,255,.12);border-radius:2rem;font-size:.88rem;transition:.25s;user-select:none}
+.rpill input[type=radio]:checked+label{background:var(--pr);border-color:var(--pr);box-shadow:0 0 14px rgba(234,88,12,.45)}
+
+/* Toast */
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:9999;background:var(--bg2);border:1px solid rgba(234,88,12,.45);border-radius:3rem;padding:.75rem 2rem;font-size:.9rem;box-shadow:0 8px 30px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .4s,transform .4s;white-space:nowrap;max-width:calc(100vw - 2rem);text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+
+/* Notice */
+.ntc{background:linear-gradient(90deg,#7c2d12,#c2410c,#7c2d12);background-size:200%;animation:gm 4s linear infinite}
+@keyframes gm{0%{background-position:0%}100%{background-position:200%}}
+
+/* Pulse */
+@keyframes pulse-r{0%{box-shadow:0 0 0 0 rgba(234,88,12,.7)}70%{box-shadow:0 0 0 8px rgba(234,88,12,0)}100%{box-shadow:0 0 0 0 rgba(234,88,12,0)}}
+.pdot{animation:pulse-r 2s infinite}
+
+/* Spinner */
+.spin{border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;width:1.15rem;height:1.15rem;animation:sp .7s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* Section tag */
+.stag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(234,88,12,.12);border:1px solid rgba(234,88,12,.3);border-radius:2rem;padding:.28rem .85rem;font-size:.78rem;color:var(--prl);text-transform:uppercase;letter-spacing:.04em}
+
+/* Step circle */
+.scir{width:2.3rem;height:2.3rem;background:linear-gradient(135deg,var(--pr),var(--prd));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;flex-shrink:0;box-shadow:0 0 16px rgba(234,88,12,.4)}
+
+/* Payment info card */
+.pay-info{display:none}
+.pay-info.show{display:block}
+
+/* Loading overlay */
+#loading{position:fixed;inset:0;z-index:9000;background:rgba(13,8,3,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+#loading.gone{display:none}
+
+/* Success */
+#sscreen{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
+#sscreen.open{display:flex}
+
+@media(max-width:640px){.mbox{border-radius:1rem}}
+</style>
+</head>
+
+<body class="font-hind">
+
+<!-- ══════════════════════════════════════════
+     ⚙️  LOCAL CONFIG — Google Sheet যোগ না করলে এখান থেকে সব চলবে
+     Google Sheet যোগ করলে Sheet-এর ডেটা এটাকে Override করবে
+══════════════════════════════════════════ -->
+<script>
+/* ╔══════════════════════════════════════════════════════════╗
+   ║        ⭐ SITE CONFIG — এখানে এডিট করুন               ║
+   ╚══════════════════════════════════════════════════════════╝ */
+const CFG = {
+
+  /* ── সাইট ────────────────────────────── */
+  siteName:   "নাঈমার আচার",
+  tagline:    "খাঁটি হাতের তৈরি আচার, সরাসরি আপনার দরজায়",
+  logoUrl:    "https://placehold.co/140x48/ea580c/fff?text=নাঈমার+আচার",
+  faviconUrl: "",
+
+  /* ── Sliding Notice Text ─────────────────
+     প্রতিটি string আলাদা আলাদা স্লাইডে দেখাবে */
+  noticeTexts: [
+    "🔥 ৫০০ টাকার উপরে অর্ডারে বিনামূল্যে ডেলিভারি",
+    "📦 সারা বাংলাদেশে দ্রুত হোম ডেলিভারি",
+    "✅ ১০০% অর্গানিক — কোনো প্রিজার্ভেটিভ নেই",
+    "💚 COD + বিকাশ + নগদ পেমেন্ট সুবিধা",
+    "⭐ ২০০০+ সন্তুষ্ট গ্রাহক — আজই অর্ডার করুন!",
+  ],
+
+  /* ── Hero Image Slider ───────────────────
+     যেকোনো সংখ্যক স্লাইড যোগ করুন */
+  heroSlides: [
+    { img:"https://placehold.co/700x400/200a00/ea580c?text=আমাদের+আচার+🌶️", headline:"গ্রামের স্বাদ, ঘরে বসে উপভোগ করুন", sub:"১০০% প্রাকৃতিক উপাদানে তৈরি, কোনো প্রিজার্ভেটিভ নেই" },
+    { img:"https://placehold.co/700x400/200a00/fbbf24?text=মায়ের+হাতের+রেসিপি+🍋", headline:"মায়ের হাতের স্বাদ মনে আছে?", sub:"সেই একই ঐতিহ্যবাহী রেসিপিতে তৈরি আমাদের প্রতিটি পণ্য" },
+    { img:"https://placehold.co/700x400/200a00/fb923c?text=দ্রুত+ডেলিভারি+🚀", headline:"সারা বাংলাদেশে দ্রুত ডেলিভারি", sub:"অর্ডার করুন আজই — পৌঁছে যাবে ২-৩ কার্যদিবসে" },
+  ],
+
+  /* ── Delivery ────────────────────────── */
+  deliveryInside:  60,
+  deliveryOutside: 120,
+  deliveryInsideLabel:  "চট্টগ্রাম সিটির ভেতরে",
+  deliveryOutsideLabel: "চট্টগ্রামের বাইরে (সারা বাংলাদেশ)",
+
+  /* ── Payment Numbers ─────────────────── */
+  bkashNumber:  "01XXXXXXXXX",   // বিকাশ নম্বর
+  nagadNumber:  "01XXXXXXXXX",   // নগদ নম্বর
+  bkashType:    "Personal",      // Personal বা Merchant
+  nagadType:    "Personal",
+
+  /* ── Products (fallback) ─────────────── */
+  products: [
+    { id:"p1", title:"আমের আচার",     img:"https://placehold.co/320x220/1a0800/ea580c?text=আমের+আচার",     badge:"বেস্ট সেলার", badgeColor:"bg-amber-500", desc:"কাঁচা আমের টক-ঝাল আচার", sizes:[{label:"২৫০ গ্রাম",price:120},{label:"৫০০ গ্রাম",price:220},{label:"১ কেজি",price:400}] },
+    { id:"p2", title:"তেঁতুলের আচার", img:"https://placehold.co/320x220/1a0800/fbbf24?text=তেঁতুলের+আচার", badge:"নতুন",       badgeColor:"bg-brand-600",  desc:"মিষ্টি-টক তেঁতুলের আচার",  sizes:[{label:"২৫০ গ্রাম",price:100},{label:"৫০০ গ্রাম",price:185}] },
+    { id:"p3", title:"মরিচের আচার",   img:"https://placehold.co/320x220/1a0800/c2410c?text=মরিচের+আচার",   badge:"ঝাল",        badgeColor:"bg-red-600",    desc:"কাঁচা মরিচের ঝাল আচার",    sizes:[{label:"২০০ গ্রাম",price:110},{label:"৪০০ গ্রাম",price:200}] },
+    { id:"p4", title:"জলপাইয়ের আচার",img:"https://placehold.co/320x220/1a0800/84cc16?text=জলপাইয়ের+আচার",badge:"",           badgeColor:"",              desc:"টসটসে জলপাইয়ের আচার",     sizes:[{label:"২৫০ গ্রাম",price:130},{label:"৫০০ গ্রাম",price:240}] },
+  ],
+
+  /* ══════════════════════════════════════════════════
+     📋 GOOGLE SHEET ADMIN PANEL — দুটি Sheet ব্যবহার করুন
+     ══════════════════════════════════════════════════
+
+     ▶ Sheet 1 = "Settings" (সাইটের সব সেটিং)
+       Row ফরম্যাট: key,value  (Row 1 = header, skip)
+       ┌─────────────────────┬────────────────────────────────────────┐
+       │ key (A কলাম)        │ value (B কলাম)                         │
+       ├─────────────────────┼────────────────────────────────────────┤
+       │ siteName            │ নাঈমার আচার                            │
+       │ logoUrl             │ https://...                            │
+       │ phone               │ 01XXXXXXXXX                            │
+       │ whatsapp            │ 880XXXXXXXXXX                          │
+       │ facebook            │ https://facebook.com/...               │
+       │ instagram           │ https://instagram.com/...              │
+       │ bkashNumber         │ 01XXXXXXXXX                            │
+       │ bkashType           │ Personal                               │
+       │ nagadNumber         │ 01XXXXXXXXX                            │
+       │ nagadType           │ Personal                               │
+       │ deliveryInside      │ 60                                     │
+       │ deliveryOutside     │ 120                                    │
+       │ deliveryInsideLabel │ চট্টগ্রাম সিটির ভেতরে                  │
+       │ deliveryOutsideLabel│ চট্টগ্রামের বাইরে (সারা বাংলাদেশ)      │
+       │ noticeText          │ 🔥 অফার ১ | 📦 অফার ২ | ✅ অফার ৩     │
+       │                     │ (pipe | দিয়ে আলাদা করুন)               │
+       │ slide1_img          │ https://...                            │
+       │ slide1_headline     │ গ্রামের স্বাদ...                       │
+       │ slide1_sub          │ ১০০% প্রাকৃতিক...                      │
+       │ slide2_img          │ https://...                            │
+       │ slide2_headline     │ ...                                    │
+       │ slide2_sub          │ ...                                    │
+       │ slide3_img          │ (৩য় স্লাইড না থাকলে ফাঁকা রাখুন)       │
+       └─────────────────────┴────────────────────────────────────────┘
+
+     ▶ Sheet 2 = "Products" (পণ্যের তালিকা)
+       Row ফরম্যাট (Row 1 = header, skip হয়):
+       A: title | B: img_url
+       C: size1_label | D: size1_price
+       E: size2_label | F: size2_price  (ফাঁকা = নেই)
+       G: size3_label | H: size3_price  (ফাঁকা = নেই)
+       I: badge | J: badgeColor | K: desc
+       L: status  (active / inactive)
+
+       badgeColor উদাহরণ: bg-amber-500, bg-red-600, bg-green-600
+
+     👉 দুটো Sheet-ই পাবলিশ করুন:
+        File → Share → Publish to web → Sheet নির্বাচন → CSV → Publish
+
+     ══════════════════════════════════════════════════ */
+
+  // Sheet 1 (Settings) CSV লিংক — key,value ফরম্যাট
+  adminSettingsCSV: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5l37qD7h91uDGYLItR_w19ubRVGIy7SQ0d9El1JApsVTJazfq1O4VXOT69cDLdeo5JvxLDxqHA_p6/pub?gid=0&single=true&output=csv",  // ← Sheet1 ("Settings") CSV লিংক দিন
+
+  // Sheet 2 (Products) CSV লিংক — পণ্যের তালিকা
+  adminSheetCSV: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5l37qD7h91uDGYLItR_w19ubRVGIy7SQ0d9El1JApsVTJazfq1O4VXOT69cDLdeo5JvxLDxqHA_p6/pub?gid=275282945&single=true&output=csv",     // ← Sheet2 ("Products") CSV লিংক দিন
+
+  /* ── Google Form ────────────────────────
+     Form পাবলিশ করে entry ID গুলো বসান    */
+  googleFormAction: "https://docs.google.com/forms/d/e/1FAIpQLSe6fXsXN_gqyUn6u38HrnHhdzmfKXiL5dLpAvGp3rCJDHsgIg/formResponse",
+  formFields: {
+    name:"entry.2146925163",phone:"entry.2109587308",address:"entry.639005197",
+    product:"entry.55616318",size:"entry.1292899856",qty:"entry.1580244968",
+    shipping:"entry.1591948337",payment:"entry.670337506",trxid:"entry.1306958549",total:"entry.1030189842",
+    note:"entry.1979454757"
+  },
+
+  /* ── Telegram ───────────────────────────
+     ✅ CORS সমাধান: Google Apps Script Proxy
+     telegramProxyUrl ফাঁকা = direct API (কিছু browser block করে)
+     telegramProxyUrl দিলে = সব browser থেকে কাজ করবে
+
+     Google Apps Script কোড (script.google.com → New Project):
+     ┌──────────────────────────────────────────────────┐
+     │ function doPost(e) {                             │
+     │   const p = JSON.parse(e.postData.contents);    │
+     │   const url = "https://api.telegram.org/bot"    │
+     │               + p.token + "/sendMessage";       │
+     │   const res = UrlFetchApp.fetch(url, {          │
+     │     method: "post",                             │
+     │     contentType: "application/json",            │
+     │     payload: JSON.stringify({                   │
+     │       chat_id: p.chat_id,                       │
+     │       text: p.text,                             │
+     │       parse_mode: p.parse_mode                  │
+     │     })                                          │
+     │   });                                           │
+     │   return ContentService                         │
+     │     .createTextOutput(res.getContentText())     │
+     │     .setMimeType(ContentService.MimeType.JSON); │
+     │ }                                               │
+     └──────────────────────────────────────────────────┘
+     Deploy: Extensions → Apps Script → Deploy → New
+     → Web App → Execute as: Me → Who has access: Anyone
+     → Deploy → Copy Web App URL → নিচে বসান          */
+  telegramToken:    "8947341929:AAFEqeQFxXGdjeE8C9DavjpS5gidFNyMX_I",
+  telegramChatId:   "8947341929",
+  telegramProxyUrl: "https://script.google.com/macros/s/AKfycbzA4Vi3RAeMjAmXQvK4WS-FHhlp-U5gVkehxASWBmCkofF4PoVw1OuxDyFwVNVsFQiG/exec",  // ← Apps Script Web App URL বসান (সব browser কাজ করবে)
+
+  /* ── Contact ────────────────────────── */
+  phone:     "01XXXXXXXXX",
+  whatsapp:  "880XXXXXXXXXX",
+  facebook:  "https://facebook.com/",
+  instagram: "https://instagram.com/",
+};
+</script>
+
+
+<!-- ══════════════════════════════════════════
+     LOADING SCREEN
+══════════════════════════════════════════ -->
+<div id="loading">
+  <div class="text-4xl mb-2">🍋</div>
+  <div class="spin" style="width:2rem;height:2rem"></div>
+  <p class="text-sm text-gray-400 mt-2">লোড হচ্ছে...</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<nav id="nav" class="py-3 px-4 md:px-8">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="#"><img id="nav-logo" src="" alt="Logo" class="h-10 w-auto"/></a>
+    <div class="hidden md:flex items-center gap-6 text-sm">
+      <a href="#products" class="text-gray-300 hover:text-white transition">পণ্যসমূহ</a>
+      <a href="#how" class="text-gray-300 hover:text-white transition">কিভাবে অর্ডার</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition">যোগাযোগ</a>
+    </div>
+    <button onclick="openModal()" class="gbtn text-white text-sm font-semibold px-5 py-2.5 rounded-full flex items-center gap-2">
+      <i class="fa-solid fa-bag-shopping text-xs"></i> অর্ডার করুন
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     NOTICE BAR — Navbar নিচে, Smooth Marquee
+══════════════════════════════════════════ -->
+<div class="ntc" id="notice-bar">
+  <div id="ticker-inner" style="display:inline-block;padding-right:60px"></div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     HERO SECTION
+══════════════════════════════════════════ -->
+<section class="mesh min-h-screen flex items-center pb-16 relative overflow-hidden" style="padding-top:108px">
+  <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-10" style="background:radial-gradient(circle,#ea580c,transparent)"></div>
+  <div class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-8" style="background:radial-gradient(circle,#fbbf24,transparent)"></div>
+
+  <div class="max-w-6xl mx-auto px-4 md:px-8 w-full">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Text side with TEXT SLIDER -->
+      <div class="fu">
+        <div class="stag mb-5">
+          <span class="pdot w-2 h-2 rounded-full bg-orange-400 inline-block"></span>
+          এখন অর্ডার চলছে
+        </div>
+
+        <!-- ── Sliding Headline ── -->
+        <div class="tslide-wrap mb-4" id="hero-text-wrap" style="overflow:hidden;position:relative">
+          <div id="hero-text-track" style="display:flex;flex-direction:column;transition:transform .7s cubic-bezier(.4,0,.2,1)">
+            <!-- JS fills -->
+          </div>
+        </div>
+
+        <p id="hero-sub" class="text-base md:text-lg text-gray-300 mb-8 leading-relaxed"></p>
+
+        <div class="flex flex-wrap gap-4 mb-10">
+          <button onclick="openModal()" class="gbtn text-white font-bold px-8 py-3.5 rounded-full text-base flex items-center gap-2">
+            <i class="fa-solid fa-bolt"></i> এখনই অর্ডার করুন
+          </button>
+          <a href="#products" class="glass text-white font-semibold px-7 py-3.5 rounded-full text-sm hover:bg-white/10 transition flex items-center gap-2">
+            <i class="fa-solid fa-eye"></i> পণ্য দেখুন
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-4 text-sm text-gray-400">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-green-400"></i> নিরাপদ পেমেন্ট</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-truck text-orange-400"></i> দ্রুত ডেলিভারি</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-leaf text-lime-400"></i> ১০০% প্রাকৃতিক</span>
+        </div>
+      </div>
+
+      <!-- Image Slider side -->
+      <div class="fu float">
+        <div class="relative rounded-2xl overflow-hidden" style="box-shadow:0 30px 80px rgba(234,88,12,.3)">
+          <div id="hslide-track" class="hslide-track" style="height:340px">
+            <!-- JS fills -->
+          </div>
+          <!-- Prev/Next -->
+          <button onclick="hSlideGo(hSlideIdx-1)" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 glass rounded-full flex items-center justify-center text-sm hover:bg-white/20 transition z-10">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button onclick="hSlideGo(hSlideIdx+1)" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 glass rounded-full flex items-center justify-center text-sm hover:bg-white/20 transition z-10">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <!-- Slide counter -->
+          <div id="hslide-counter" class="absolute bottom-3 right-3 glass text-xs px-2.5 py-1 rounded-full"></div>
+        </div>
+        <!-- Dots -->
+        <div id="hslide-dots" class="flex justify-center gap-2 mt-3"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
+<div class="glass border-y border-white/10 py-6">
+  <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div><div class="text-2xl font-bold gt">২০০০+</div><div class="text-xs text-gray-400 mt-1">সন্তুষ্ট গ্রাহক</div></div>
+    <div><div class="text-2xl font-bold gt">৫★</div><div class="text-xs text-gray-400 mt-1">গড় রেটিং</div></div>
+    <div><div class="text-2xl font-bold gt">৬৪</div><div class="text-xs text-gray-400 mt-1">জেলায় ডেলিভারি</div></div>
+    <div><div class="text-2xl font-bold gt">৩+ বছর</div><div class="text-xs text-gray-400 mt-1">অভিজ্ঞতা</div></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PRODUCTS
+══════════════════════════════════════════ -->
+<section id="products" class="py-20 px-4 md:px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fu">
+      <div class="stag mx-auto mb-4">আমাদের পণ্য</div>
+      <h2 class="text-3xl md:text-4xl font-bold gt mb-3">সেরা আচারের সংগ্রহ</h2>
+      <p class="text-gray-400 max-w-md mx-auto text-sm">প্রতিটি পণ্য হাতে তৈরি, সর্বোচ্চ মান নিশ্চিত করে</p>
+    </div>
+    <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- JS fills -->
+    </div>
+    <div id="no-products" class="hidden text-center py-16 text-gray-500">
+      <i class="fa-solid fa-box-open text-4xl mb-4 opacity-40"></i>
+      <p>শীঘ্রই পণ্য আসছে...</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     HOW TO ORDER
+══════════════════════════════════════════ -->
+<section id="how" class="py-20 px-4 md:px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14 fu">
+      <div class="stag mx-auto mb-4">সহজ প্রক্রিয়া</div>
+      <h2 class="text-3xl font-bold gt mb-3">কিভাবে অর্ডার করবেন?</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-5">
+      <div class="fu glass rounded-2xl p-6 text-center"><div class="scir mx-auto mb-4">১</div><h3 class="font-semibold mb-2 text-sm">পণ্য বেছে নিন</h3><p class="text-xs text-gray-400">পছন্দের আচার ও সাইজ সিলেক্ট করুন</p></div>
+      <div class="fu glass rounded-2xl p-6 text-center"><div class="scir mx-auto mb-4">২</div><h3 class="font-semibold mb-2 text-sm">ফর্ম পূরণ করুন</h3><p class="text-xs text-gray-400">নাম, ফোন ও ঠিকানা দিন</p></div>
+      <div class="fu glass rounded-2xl p-6 text-center"><div class="scir mx-auto mb-4">৩</div><h3 class="font-semibold mb-2 text-sm">পেমেন্ট করুন</h3><p class="text-xs text-gray-400">COD বা বিকাশ/নগদে পেমেন্ট</p></div>
+      <div class="fu glass rounded-2xl p-6 text-center"><div class="scir mx-auto mb-4">৪</div><h3 class="font-semibold mb-2 text-sm">পণ্য পান</h3><p class="text-xs text-gray-400">২-৩ কার্যদিবসে দরজায়</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════ -->
+<section class="py-14 px-4 md:px-8">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-10 fu"><div class="stag mx-auto mb-4">গ্রাহকদের মতামত</div><h2 class="text-3xl font-bold gt">তারা কী বলছেন?</h2></div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="fu glass rounded-2xl p-6"><div class="text-amber-400 mb-3 text-sm">★★★★★</div><p class="text-gray-300 text-sm leading-relaxed mb-4">"অসাধারণ স্বাদ! মায়ের হাতের আচারের কথা মনে পড়ে গেল। অবশ্যই আবার অর্ডার করব।"</p><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-orange-800 flex items-center justify-center font-bold text-sm">র</div><div><div class="font-semibold text-sm">রহিমা বেগম</div><div class="text-xs text-gray-500">ঢাকা</div></div></div></div>
+      <div class="fu glass rounded-2xl p-6"><div class="text-amber-400 mb-3 text-sm">★★★★★</div><p class="text-gray-300 text-sm leading-relaxed mb-4">"দ্রুত ডেলিভারি ও প্যাকেজিং অনেক সুন্দর। মেসের সবার কাছেই পছন্দ হয়েছে।"</p><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-orange-800 flex items-center justify-center font-bold text-sm">ক</div><div><div class="font-semibold text-sm">করিম সাহেব</div><div class="text-xs text-gray-500">চট্টগ্রাম</div></div></div></div>
+      <div class="fu glass rounded-2xl p-6"><div class="text-amber-400 mb-3 text-sm">★★★★☆</div><p class="text-gray-300 text-sm leading-relaxed mb-4">"মরিচের আচার অনেক ঝাল — কিন্তু আমি ঠিক এটাই চেয়েছিলাম! পরিবারের সবাই খুশি।"</p><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-orange-800 flex items-center justify-center font-bold text-sm">স</div><div><div class="font-semibold text-sm">সুমাইয়া আক্তার</div><div class="text-xs text-gray-500">সিলেট</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section id="contact" class="py-14 px-4 md:px-8">
+  <div class="max-w-3xl mx-auto text-center fu">
+    <div class="glass rounded-3xl p-10" style="border-color:rgba(234,88,12,.25)">
+      <div class="stag mx-auto mb-4">যোগাযোগ</div>
+      <h2 class="text-3xl font-bold gt mb-3">আমাদের সাথে কথা বলুন</h2>
+      <p class="text-gray-400 mb-8 text-sm">যেকোনো প্রশ্নে আমরা পাশে আছি</p>
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <a id="c-phone" href="#" class="glass rounded-full px-5 py-2.5 text-sm flex items-center gap-2 hover:bg-white/10 transition"><i class="fa-solid fa-phone text-green-400"></i><span id="c-phone-txt"></span></a>
+        <a id="c-wa" href="#" target="_blank" class="glass rounded-full px-5 py-2.5 text-sm flex items-center gap-2 hover:bg-white/10 transition"><i class="fa-brands fa-whatsapp text-green-500"></i>WhatsApp</a>
+        <a id="c-fb" href="#" target="_blank" class="glass rounded-full px-5 py-2.5 text-sm flex items-center gap-2 hover:bg-white/10 transition"><i class="fa-brands fa-facebook text-blue-400"></i>Facebook</a>
+      </div>
+      <button onclick="openModal()" class="gbtn text-white font-bold px-10 py-3.5 rounded-full text-base flex items-center gap-2 mx-auto">
+        <i class="fa-solid fa-bag-shopping"></i> এখনই অর্ডার করুন
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="border-t border-white/8 py-8 text-center text-sm text-gray-500 px-4">
+  <img id="f-logo" src="" alt="Logo" class="h-8 mx-auto mb-3 opacity-70"/>
+  <p id="f-copy"></p>
+  <div class="flex justify-center gap-4 mt-4 text-base">
+    <a id="f-fb" href="#" target="_blank" class="hover:text-blue-400 transition"><i class="fa-brands fa-facebook"></i></a>
+    <a id="f-ig" href="#" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram"></i></a>
+    <a id="f-wa" href="#" target="_blank" class="hover:text-green-400 transition"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <p class="mt-4 text-xs opacity-50 leading-relaxed">
+     <strong>Development by: Mahin Technical Lab</strong><br/>
+  </p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     ORDER MODAL
+══════════════════════════════════════════ -->
+<div id="moverlay" onclick="overlayClose(event)">
+  <div class="mbox">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-5 border-b border-white/10">
+      <div><h3 class="text-xl font-bold">অর্ডার করুন</h3><p class="text-xs text-gray-400 mt-0.5">নিচের ফর্মটি পূরণ করুন</p></div>
+      <button onclick="closeModal()" class="text-gray-400 hover:text-white w-9 h-9 rounded-full glass flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="p-5 space-y-4">
+
+      <!-- Product -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-box mr-1 text-orange-400"></i>পণ্য নির্বাচন</label>
+        <select id="f-product" class="fi" onchange="onProductChange()">
+          <option value="">-- পণ্য বেছে নিন --</option>
+        </select>
+      </div>
+
+      <!-- Size -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-weight-hanging mr-1 text-orange-400"></i>সাইজ / পরিমাণ</label>
+        <select id="f-size" class="fi" onchange="calcTotal()">
+          <option value="">-- প্রথমে পণ্য সিলেক্ট করুন --</option>
+        </select>
+      </div>
+
+      <!-- Qty -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-hashtag mr-1 text-orange-400"></i>পরিমাণ</label>
+        <div class="flex items-center gap-3">
+          <button type="button" onclick="changeQty(-1)" class="w-10 h-10 glass rounded-xl flex items-center justify-center text-lg hover:bg-white/15 transition font-bold">−</button>
+          <input type="number" id="f-qty" class="fi text-center" style="width:5rem" value="1" min="1" max="99" oninput="calcTotal()"/>
+          <button type="button" onclick="changeQty(1)" class="w-10 h-10 glass rounded-xl flex items-center justify-center text-lg hover:bg-white/15 transition font-bold">+</button>
+        </div>
+      </div>
+
+      <!-- Shipping -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-truck mr-1 text-orange-400"></i>ডেলিভারি এলাকা</label>
+        <div class="space-y-2">
+          <div class="rpill">
+            <input type="radio" name="shipping" id="sh-in" value="inside" checked onchange="calcTotal()"/>
+            <label for="sh-in" class="flex justify-between items-center"><span id="sh-in-lbl"></span><span id="sh-in-price" class="font-bold text-orange-400"></span></label>
+          </div>
+          <div class="rpill">
+            <input type="radio" name="shipping" id="sh-out" value="outside" onchange="calcTotal()"/>
+            <label for="sh-out" class="flex justify-between items-center"><span id="sh-out-lbl"></span><span id="sh-out-price" class="font-bold text-orange-400"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Price Summary -->
+      <div class="glass rounded-xl p-4 space-y-2 text-sm" style="border-color:rgba(234,88,12,.25)">
+        <div class="flex justify-between text-gray-400"><span>পণ্যের মূল্য</span><span id="s-prod">৳ ০</span></div>
+        <div class="flex justify-between text-gray-400"><span>ডেলিভারি</span><span id="s-del">৳ ০</span></div>
+        <div class="border-t border-white/10 pt-2 flex justify-between font-bold text-base">
+          <span>সর্বমোট</span><span id="s-total" class="gt text-xl">৳ ০</span>
+        </div>
+      </div>
+
+      <!-- Customer info -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-user mr-1 text-orange-400"></i>আপনার নাম</label>
+        <input type="text" id="f-name" class="fi" placeholder="পুরো নাম লিখুন"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-phone mr-1 text-orange-400"></i>মোবাইল নম্বর</label>
+        <input type="tel" id="f-phone" class="fi" placeholder="01XXXXXXXXX"/>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-location-dot mr-1 text-orange-400"></i>সম্পূর্ণ ঠিকানা</label>
+        <textarea id="f-address" class="fi" rows="3" placeholder="বাড়ি নং, রাস্তা, এলাকা, জেলা..."></textarea>
+      </div>
+
+      <!-- Payment Method -->
+      <div>
+        <label class="block text-sm font-semibold mb-3 text-gray-300"><i class="fa-solid fa-credit-card mr-1 text-orange-400"></i>পেমেন্ট পদ্ধতি</label>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="rpill">
+            <input type="radio" name="payment" id="pay-cod" value="COD" checked onchange="onPayChange()"/>
+            <label for="pay-cod" class="text-center py-3"><i class="fa-solid fa-money-bill-wave block mb-1 text-green-400 text-lg"></i><span class="text-xs font-bold">COD</span></label>
+          </div>
+          <div class="rpill">
+            <input type="radio" name="payment" id="pay-bk" value="বিকাশ" onchange="onPayChange()"/>
+            <label for="pay-bk" class="text-center py-3"><i class="fa-solid fa-mobile-screen-button block mb-1 text-pink-400 text-lg"></i><span class="text-xs font-bold">বিকাশ</span></label>
+          </div>
+          <div class="rpill">
+            <input type="radio" name="payment" id="pay-ng" value="নগদ" onchange="onPayChange()"/>
+            <label for="pay-ng" class="text-center py-3"><i class="fa-solid fa-wallet block mb-1 text-orange-400 text-lg"></i><span class="text-xs font-bold">নগদ</span></label>
+          </div>
+        </div>
+
+        <!-- bKash Info -->
+        <div id="bkash-info" class="pay-info mt-3 glass rounded-xl p-4 border" style="border-color:rgba(236,72,153,.3)">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fa-solid fa-mobile-screen-button text-pink-400 text-xl"></i>
+            <div>
+              <div class="text-xs text-gray-400">বিকাশ নম্বরে পাঠান (<span id="bk-type"></span>)</div>
+              <div class="text-lg font-bold text-pink-400" id="bk-num"></div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400">পাঠানোর পর নিচে TrxID দিন। <strong>Send Money</strong> করুন।</p>
+        </div>
+
+        <!-- Nagad Info -->
+        <div id="nagad-info" class="pay-info mt-3 glass rounded-xl p-4 border" style="border-color:rgba(251,146,60,.3)">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fa-solid fa-wallet text-orange-400 text-xl"></i>
+            <div>
+              <div class="text-xs text-gray-400">নগদ নম্বরে পাঠান (<span id="ng-type"></span>)</div>
+              <div class="text-lg font-bold text-orange-400" id="ng-num"></div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400">পাঠানোর পর নিচে TrxID দিন। <strong>Send Money</strong> করুন।</p>
+        </div>
+      </div>
+
+      <!-- TrxID -->
+      <div id="trx-sec" class="hidden">
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-key mr-1 text-orange-400"></i>Transaction ID (TrxID)</label>
+        <input type="text" id="f-trxid" class="fi" placeholder="পেমেন্টের পর TrxID দিন"/>
+      </div>
+
+      <!-- Note -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300"><i class="fa-solid fa-comment mr-1 text-orange-400"></i>বিশেষ নোট <span class="font-normal text-gray-500">(ঐচ্ছিক)</span></label>
+        <input type="text" id="f-note" class="fi" placeholder="কোনো বিশেষ নির্দেশনা থাকলে লিখুন..."/>
+      </div>
+
+      <!-- Submit -->
+      <button id="sub-btn" onclick="submitOrder()" class="gbtn text-white font-bold w-full py-4 rounded-xl text-base flex items-center justify-center gap-2 mt-2">
+        <i class="fa-solid fa-paper-plane"></i> অর্ডার কনফার্ম করুন
+      </button>
+      <p class="text-xs text-gray-500 text-center">অর্ডার দেওয়ার পর আমাদের টিম আপনাকে কনফার্মেশন কল করবে।</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SUCCESS SCREEN -->
+<div id="sscreen">
+  <div class="mbox max-w-sm text-center p-10">
+    <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style="background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 0 40px rgba(34,197,94,.4)">
+      <i class="fa-solid fa-check text-3xl text-white"></i>
+    </div>
+    <h3 class="text-2xl font-bold mb-2">অর্ডার সফল! 🎉</h3>
+    <p class="text-gray-400 text-sm mb-6">আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব। ধন্যবাদ!</p>
+    <div id="order-summary-box" class="glass rounded-xl p-4 text-left text-sm mb-6 space-y-1.5"></div>
+    <button onclick="closeSuccess()" class="gbtn text-white font-bold px-10 py-3 rounded-full">ঠিক আছে</button>
+  </div>
+</div>
+
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ════════════════════════════════
+   STATE
+════════════════════════════════ */
+let PRODUCTS = [];       // final product list (sheet or fallback)
+let SITE     = {};       // merged settings (sheet overrides CFG)
+let hSlideIdx = 0, hSlideTimer;
+let textSlideIdx = 0, textSlideTimer;
+
+/* ════════════════════════════════
+   BOOT
+════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1. Load settings sheet first (may override CFG)
+  await loadSettingsSheet();
+
+  // 2. Merge CFG with sheet overrides into SITE
+  buildSITE();
+
+  // 3. Apply SITE to all static elements
+  initStaticUI();
+
+  // 4. Notice bar, sliders (use SITE not CFG directly)
+  initNoticeBar();
+  initHeroSlider();
+  initHeroTextSlider();
+  initFadeUp();
+  initNavScroll();
+
+  // 5. Load products sheet
+  await loadAdminSheet();
+  buildProductGrid();
+  buildProductDropdown();
+
+  document.getElementById('loading').classList.add('gone');
+});
+
+/* ════════════════════════════════
+   BUILD SITE — merge CFG + sheet overrides
+════════════════════════════════ */
+function buildSITE() {
+  // Deep copy CFG as base
+  SITE = {
+    siteName:             CFG.siteName,
+    tagline:              CFG.tagline,
+    logoUrl:              CFG.logoUrl,
+    faviconUrl:           CFG.faviconUrl,
+    phone:                CFG.phone,
+    whatsapp:             CFG.whatsapp,
+    facebook:             CFG.facebook,
+    instagram:            CFG.instagram,
+    bkashNumber:          CFG.bkashNumber,
+    bkashType:            CFG.bkashType,
+    nagadNumber:          CFG.nagadNumber,
+    nagadType:            CFG.nagadType,
+    deliveryInside:       CFG.deliveryInside,
+    deliveryOutside:      CFG.deliveryOutside,
+    deliveryInsideLabel:  CFG.deliveryInsideLabel,
+    deliveryOutsideLabel: CFG.deliveryOutsideLabel,
+    noticeTexts:          [...CFG.noticeTexts],
+    heroSlides:           CFG.heroSlides.map(s => ({...s})),
+  };
+
+  // Apply sheet overrides (stored in _sheetSettings by loadSettingsSheet)
+  const ss = window._sheetSettings || {};
+
+  if (ss.siteName)             SITE.siteName             = ss.siteName;
+  if (ss.logoUrl)              SITE.logoUrl              = ss.logoUrl;
+  if (ss.phone)                SITE.phone                = ss.phone;
+  if (ss.whatsapp)             SITE.whatsapp             = ss.whatsapp;
+  if (ss.facebook)             SITE.facebook             = ss.facebook;
+  if (ss.instagram)            SITE.instagram            = ss.instagram;
+  if (ss.bkashNumber)          SITE.bkashNumber          = ss.bkashNumber;
+  if (ss.bkashType)            SITE.bkashType            = ss.bkashType;
+  if (ss.nagadNumber)          SITE.nagadNumber          = ss.nagadNumber;
+  if (ss.nagadType)            SITE.nagadType            = ss.nagadType;
+  if (ss.deliveryInside)       SITE.deliveryInside       = parseFloat(ss.deliveryInside)  || CFG.deliveryInside;
+  if (ss.deliveryOutside)      SITE.deliveryOutside      = parseFloat(ss.deliveryOutside) || CFG.deliveryOutside;
+  if (ss.deliveryInsideLabel)  SITE.deliveryInsideLabel  = ss.deliveryInsideLabel;
+  if (ss.deliveryOutsideLabel) SITE.deliveryOutsideLabel = ss.deliveryOutsideLabel;
+
+  // Notice texts from sheet (pipe-separated)
+  if (ss.noticeText) {
+    const parsed = ss.noticeText.split('|').map(t => t.trim()).filter(Boolean);
+    if (parsed.length) SITE.noticeTexts = parsed;
+  }
+
+  // Hero slides from sheet (slide1_img, slide1_headline, slide1_sub, slide2_... etc.)
+  const sheetSlides = [];
+  for (let i = 1; i <= 10; i++) {
+    const img = ss[`slide${i}_img`];
+    const hl  = ss[`slide${i}_headline`];
+    const sub = ss[`slide${i}_sub`];
+    if (img || hl) {
+      sheetSlides.push({
+        img:      img  || (CFG.heroSlides[i-1]?.img  || ''),
+        headline: hl   || (CFG.heroSlides[i-1]?.headline || ''),
+        sub:      sub  || (CFG.heroSlides[i-1]?.sub  || ''),
+      });
+    }
+  }
+  if (sheetSlides.length) SITE.heroSlides = sheetSlides;
+}
+
+/* ════════════════════════════════
+   SETTINGS SHEET LOADER
+   Sheet 1 format: key,value (row 1 = header)
+   Stores result in window._sheetSettings
+════════════════════════════════ */
+async function loadSettingsSheet() {
+  window._sheetSettings = {};
+  const url = CFG.adminSettingsCSV;
+  if (!url || !url.startsWith('http')) return;
+
+  try {
+    const res  = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = text.trim().split('\n');
+
+    const settings = {};
+    // Skip header row (index 0)
+    for (let r = 1; r < rows.length; r++) {
+      const cols = csvRowParse(rows[r]);
+      const key  = (cols[0] || '').trim();
+      const val  = (cols[1] || '').trim();
+      if (key) settings[key] = val;
+    }
+
+    window._sheetSettings = settings;
+    console.log('[Settings Sheet] লোড সফল। keys:', Object.keys(settings).join(', '));
+  } catch (err) {
+    console.warn('[Settings Sheet] লোড ব্যর্থ, fallback চলছে:', err.message);
+  }
+}
+
+/* ════════════════════════════════
+   STATIC UI INIT (uses SITE not CFG)
+════════════════════════════════ */
+function initStaticUI() {
+  document.getElementById('pg-title').textContent = SITE.siteName;
+  document.getElementById('nav-logo').src  = SITE.logoUrl;
+  document.getElementById('f-logo').src    = SITE.logoUrl;
+  document.getElementById('f-copy').textContent = `© ${new Date().getFullYear()} ${SITE.siteName}. সর্বস্বত্ব সংরক্ষিত।`;
+  if (SITE.faviconUrl) {
+    const l = document.createElement('link');
+    l.rel = 'icon'; l.href = SITE.faviconUrl;
+    document.head.appendChild(l);
+  }
+
+  document.getElementById('c-phone').href         = `tel:${SITE.phone}`;
+  document.getElementById('c-phone-txt').textContent = SITE.phone;
+  document.getElementById('c-wa').href            = `https://wa.me/${SITE.whatsapp}`;
+  document.getElementById('c-fb').href            = SITE.facebook;
+  document.getElementById('f-fb').href            = SITE.facebook;
+  document.getElementById('f-ig').href            = SITE.instagram;
+  document.getElementById('f-wa').href            = `https://wa.me/${SITE.whatsapp}`;
+
+  // Payment numbers (from SITE = sheet or CFG)
+  document.getElementById('bk-num').textContent   = SITE.bkashNumber;
+  document.getElementById('bk-type').textContent  = SITE.bkashType;
+  document.getElementById('ng-num').textContent   = SITE.nagadNumber;
+  document.getElementById('ng-type').textContent  = SITE.nagadType;
+
+  // Shipping labels
+  document.getElementById('sh-in-lbl').textContent    = SITE.deliveryInsideLabel;
+  document.getElementById('sh-in-price').textContent  = `৳ ${SITE.deliveryInside}`;
+  document.getElementById('sh-out-lbl').textContent   = SITE.deliveryOutsideLabel;
+  document.getElementById('sh-out-price').textContent = `৳ ${SITE.deliveryOutside}`;
+}
+
+/* ════════════════════════════════
+   NOTICE BAR (smooth marquee, uses SITE)
+════════════════════════════════ */
+function initNoticeBar() {
+  const texts  = SITE.noticeTexts;
+  const inner  = document.getElementById('ticker-inner');
+  // Duplicate 4x so marquee always fills screen seamlessly
+  const sep    = '    •    ';
+  const single = texts.join(sep);
+  inner.textContent = (single + sep).repeat(4);
+
+  // Dynamic speed: ~80px per second feels smooth
+  const totalW = inner.scrollWidth;
+  const dur    = Math.max(20, totalW / 80);
+  inner.style.animationDuration = dur + 's';
+}
+
+/* ════════════════════════════════
+   HERO IMAGE SLIDER (uses SITE)
+════════════════════════════════ */
+function initHeroSlider() {
+  const track  = document.getElementById('hslide-track');
+  const dots   = document.getElementById('hslide-dots');
+  const slides = SITE.heroSlides;
+
+  track.innerHTML = '';
+  dots.innerHTML  = '';
+
+  slides.forEach((s, i) => {
+    const d = document.createElement('div');
+    d.className = 'hslide';
+    d.innerHTML = `<img src="${s.img}" alt="${s.headline}" style="height:340px" onerror="this.src='https://placehold.co/700x340/1a0800/ea580c?text=Image+Not+Found'"/>`;
+    track.appendChild(d);
+
+    const dot = document.createElement('button');
+    dot.onclick = () => hSlideGo(i);
+    dots.appendChild(dot);
+  });
+
+  hSlideGo(0);
+  clearInterval(hSlideTimer);
+  hSlideTimer = setInterval(() => hSlideGo((hSlideIdx + 1) % slides.length), 4500);
+}
+
+function hSlideGo(idx) {
+  const slides = SITE.heroSlides;
+  const n = slides.length;
+  hSlideIdx = ((idx % n) + n) % n;
+
+  document.getElementById('hslide-track').style.transform = `translateX(-${hSlideIdx * 100}%)`;
+  document.getElementById('hslide-counter').textContent   = `${hSlideIdx + 1} / ${n}`;
+
+  document.querySelectorAll('#hslide-dots button').forEach((d, i) => {
+    d.className = `rounded-full transition-all ${i === hSlideIdx ? 'bg-orange-500 w-6 h-2.5' : 'bg-white/30 w-2.5 h-2.5'}`;
+  });
+
+  clearInterval(hSlideTimer);
+  hSlideTimer = setInterval(() => hSlideGo((hSlideIdx + 1) % slides.length), 4500);
+}
+
+/* ════════════════════════════════
+   HERO TEXT SLIDER (uses SITE)
+   Dynamic height — লেখা কাটবে না
+════════════════════════════════ */
+function initHeroTextSlider() {
+  const slides = SITE.heroSlides;
+  const track  = document.getElementById('hero-text-track');
+  const wrap   = document.getElementById('hero-text-wrap');
+
+  track.innerHTML = '';
+
+  // Build all items first (visibility:hidden) to measure real height
+  slides.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'tslide-item';
+    el.style.cssText = 'flex-shrink:0;padding-bottom:6px';
+    el.innerHTML = `<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-snug gt">${s.headline}</h1>`;
+    track.appendChild(el);
+  });
+
+  // Wait one frame so browser renders & we can measure
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // Find tallest item
+      const items = track.querySelectorAll('.tslide-item');
+      let maxH = 0;
+      items.forEach(el => { maxH = Math.max(maxH, el.offsetHeight); });
+      const itemH = maxH + 8; // 8px breathing room
+
+      // Set fixed height on each item and the wrapper
+      items.forEach(el => { el.style.height = itemH + 'px'; el.style.overflow = 'hidden'; });
+      wrap.style.height = itemH + 'px';
+
+      document.getElementById('hero-sub').textContent = slides[0].sub;
+
+      clearInterval(textSlideTimer);
+      textSlideIdx = 0;
+      textSlideTimer = setInterval(() => {
+        textSlideIdx = (textSlideIdx + 1) % slides.length;
+        track.style.transform = `translateY(-${textSlideIdx * itemH}px)`;
+        document.getElementById('hero-sub').textContent = slides[textSlideIdx].sub;
+      }, 4500);
+    });
+  });
+}
+
+/* ════════════════════════════════
+   PRODUCTS SHEET LOADER
+   Sheet 2 format (Row 1 = header, skipped):
+   A: title
+   B: img_url
+   C: size1_label  D: size1_price
+   E: size2_label  F: size2_price  (optional)
+   G: size3_label  H: size3_price  (optional)
+   I: badge
+   J: badgeColor   (e.g. bg-amber-500)
+   K: desc
+   L: status       (active / inactive)
+════════════════════════════════ */
+async function loadAdminSheet() {
+  const url = CFG.adminSheetCSV;
+  if (!url || !url.startsWith('http')) {
+    PRODUCTS = CFG.products;
+    return;
+  }
+
+  try {
+    const res  = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = text.trim().split('\n');
+
+    if (rows.length < 2) {
+      console.warn('[Products Sheet] ডেটা নেই, fallback চলছে');
+      PRODUCTS = CFG.products;
+      return;
+    }
+
+    const parsed = [];
+    for (let r = 1; r < rows.length; r++) {
+      const cols   = csvRowParse(rows[r]);
+      const title  = (cols[0] || '').trim();
+      if (!title) continue;
+
+      // Status check (column L = index 11)
+      const status = (cols[11] || 'active').trim().toLowerCase();
+      if (status === 'inactive') continue;
+
+      const imgUrl = (cols[1] || '').trim()
+        || `https://placehold.co/320x220/1a0800/ea580c?text=${encodeURIComponent(title)}`;
+
+      // Parse up to 3 sizes
+      const sizes = [];
+      // Size 1: cols[2]=label, cols[3]=price
+      const s1l = (cols[2] || '').trim();
+      const s1p = parseFloat(cols[3]);
+      if (s1l && !isNaN(s1p) && s1p > 0) sizes.push({ label: s1l, price: s1p });
+
+      // Size 2: cols[4]=label, cols[5]=price
+      const s2l = (cols[4] || '').trim();
+      const s2p = parseFloat(cols[5]);
+      if (s2l && !isNaN(s2p) && s2p > 0) sizes.push({ label: s2l, price: s2p });
+
+      // Size 3: cols[6]=label, cols[7]=price
+      const s3l = (cols[6] || '').trim();
+      const s3p = parseFloat(cols[7]);
+      if (s3l && !isNaN(s3p) && s3p > 0) sizes.push({ label: s3l, price: s3p });
+
+      // Fallback if no valid size found
+      if (!sizes.length) {
+        const anyPrice = parseFloat(cols[3]) || parseFloat(cols[5]) || 0;
+        sizes.push({ label: '১ পিস', price: anyPrice });
+      }
+
+      parsed.push({
+        id:         `sh_${r}`,
+        title,
+        img:        imgUrl,
+        sizes,
+        badge:      (cols[8]  || '').trim(),
+        badgeColor: (cols[9]  || '').trim() || 'bg-orange-600',
+        desc:       (cols[10] || '').trim(),
+      });
+    }
+
+    if (parsed.length) {
+      PRODUCTS = parsed;
+      console.log(`[Products Sheet] ${PRODUCTS.length} টি পণ্য লোড হয়েছে ✅`);
+    } else {
+      console.warn('[Products Sheet] কোনো active পণ্য নেই, fallback চলছে');
+      PRODUCTS = CFG.products;
+    }
+  } catch (err) {
+    console.warn('[Products Sheet] লোড ব্যর্থ, fallback চলছে:', err.message);
+    PRODUCTS = CFG.products;
+  }
+}
+
+/* ════════════════════════════════
+   CSV ROW PARSER (handles quoted cells, \r)
+════════════════════════════════ */
+function csvRowParse(row) {
+  // Remove carriage return if present
+  row = row.replace(/\r$/, '');
+  const result = [];
+  let cur = '', inQ = false;
+  for (let i = 0; i < row.length; i++) {
+    const c = row[i];
+    if (c === '"') {
+      // Handle escaped quotes ""
+      if (inQ && row[i+1] === '"') { cur += '"'; i++; }
+      else { inQ = !inQ; }
+    } else if (c === ',' && !inQ) {
+      result.push(cur.trim());
+      cur = '';
+    } else {
+      cur += c;
+    }
+  }
+  result.push(cur.trim());
+  return result;
+}
+
+/* ════════════════════════════════
+   PRODUCT GRID
+════════════════════════════════ */
+function buildProductGrid() {
+  const grid = document.getElementById('product-grid');
+  const none = document.getElementById('no-products');
+  grid.innerHTML = '';
+
+  if (!PRODUCTS.length) { none.classList.remove('hidden'); return; }
+  none.classList.add('hidden');
+
+  PRODUCTS.forEach(p => {
+    const minP  = Math.min(...p.sizes.map(s => s.price));
+    const badge = p.badge
+      ? `<span class="absolute top-3 left-3 ${p.badgeColor} text-white text-xs font-bold px-2.5 py-1 rounded-full z-10">${p.badge}</span>` : '';
+    grid.innerHTML += `
+      <div class="pcard glass rounded-2xl overflow-hidden fu" style="border-color:rgba(234,88,12,.16)">
+        <div class="relative overflow-hidden h-44">${badge}
+          <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-base mb-1">${p.title}</h3>
+          <p class="text-gray-400 text-xs mb-3 leading-relaxed" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${p.desc || ''}</p>
+          <div class="flex flex-wrap gap-1 mb-4">
+            ${p.sizes.map(s => `<span class="text-xs bg-white/8 border border-white/12 rounded-full px-2 py-0.5">${s.label}</span>`).join('')}
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="gt font-bold text-lg">৳ ${minP}+</span>
+            <button onclick="openModal('${p.id}')" class="gbtn text-white text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-1">
+              <i class="fa-solid fa-bag-shopping text-xs"></i> অর্ডার
+            </button>
+          </div>
+        </div>
+      </div>`;
+  });
+  initFadeUp();
+}
+
+/* ════════════════════════════════
+   MODAL
+════════════════════════════════ */
+function openModal(productId) {
+  document.getElementById('moverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (productId) {
+    const sel = document.getElementById('f-product');
+    sel.value = productId;
+    onProductChange();
+  }
+}
+function closeModal() {
+  document.getElementById('moverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function overlayClose(e) {
+  if (e.target === document.getElementById('moverlay')) closeModal();
+}
+
+/* Build dropdown */
+function buildProductDropdown() {
+  const sel = document.getElementById('f-product');
+  sel.innerHTML = '<option value="">-- পণ্য বেছে নিন --</option>';
+  PRODUCTS.forEach(p => {
+    const o = document.createElement('option');
+    o.value = p.id; o.textContent = p.title;
+    sel.appendChild(o);
+  });
+}
+
+/* Product change → populate sizes */
+function onProductChange() {
+  const pid  = document.getElementById('f-product').value;
+  const ssel = document.getElementById('f-size');
+  const p    = PRODUCTS.find(x => x.id === pid);
+
+  if (p) {
+    ssel.innerHTML = '';
+    p.sizes.forEach(s => {
+      const o = document.createElement('option');
+      o.value = s.price;
+      o.textContent = `${s.label} — ৳ ${s.price}`;
+      o.dataset.label = s.label;
+      ssel.appendChild(o);
+    });
+  } else {
+    ssel.innerHTML = '<option value="">-- প্রথমে পণ্য সিলেক্ট করুন --</option>';
+  }
+  calcTotal();
+}
+
+/* Calc total price */
+function calcTotal() {
+  const unit  = parseFloat(document.getElementById('f-size').value)  || 0;
+  const qty   = parseInt(document.getElementById('f-qty').value)     || 1;
+  const ship  = document.querySelector('input[name=shipping]:checked').value;
+  const del   = ship === 'inside' ? SITE.deliveryInside : SITE.deliveryOutside;
+  const prod  = unit * qty;
+  const total = prod + del;
+
+  document.getElementById('s-prod').textContent  = `৳ ${prod}`;
+  document.getElementById('s-del').textContent   = `৳ ${del}`;
+  document.getElementById('s-total').textContent = `৳ ${total}`;
+}
+
+/* Qty buttons */
+function changeQty(d) {
+  const inp = document.getElementById('f-qty');
+  inp.value = Math.max(1, (parseInt(inp.value) || 1) + d);
+  calcTotal();
+}
+
+/* Payment change → show bKash/Nagad info */
+function onPayChange() {
+  const pay = document.querySelector('input[name=payment]:checked').value;
+  document.getElementById('bkash-info').classList.toggle('show', pay === 'বিকাশ');
+  document.getElementById('nagad-info').classList.toggle('show', pay === 'নগদ');
+  document.getElementById('trx-sec').classList.toggle('hidden', pay === 'COD');
+}
+
+/* ════════════════════════════════
+   SUBMIT ORDER
+════════════════════════════════ */
+async function submitOrder() {
+  /* ── collect ── */
+  const pid      = document.getElementById('f-product').value;
+  const ssel     = document.getElementById('f-size');
+  const sizeLabel= ssel.selectedOptions[0]?.dataset.label || ssel.selectedOptions[0]?.text || '';
+  const qty      = document.getElementById('f-qty').value;
+  const name     = document.getElementById('f-name').value.trim();
+  const phone    = document.getElementById('f-phone').value.trim();
+  const address  = document.getElementById('f-address').value.trim();
+  const ship     = document.querySelector('input[name=shipping]:checked').value;
+  const payment  = document.querySelector('input[name=payment]:checked').value;
+  const trxid    = document.getElementById('f-trxid').value.trim();
+  const note     = document.getElementById('f-note').value.trim();
+  const total    = document.getElementById('s-total').textContent;
+  const product  = PRODUCTS.find(p => p.id === pid);
+
+  /* ── validate ── */
+  if (!pid)                               return toast('⚠️ পণ্য সিলেক্ট করুন',        'warn');
+  if (!ssel.value)                        return toast('⚠️ সাইজ সিলেক্ট করুন',        'warn');
+  if (!name)                              return toast('⚠️ নাম লিখুন',                'warn');
+  if (!phone || !/^01\d{9}$/.test(phone)) return toast('⚠️ সঠিক মোবাইল নম্বর দিন', 'warn');
+  if (!address)                           return toast('⚠️ ঠিকানা লিখুন',             'warn');
+  if (payment !== 'COD' && !trxid)        return toast('⚠️ TrxID দিন',                'warn');
+
+  /* ── disable button ── */
+  const btn = document.getElementById('sub-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> পাঠানো হচ্ছে...';
+
+  const data = {
+    name, phone, address,
+    product: product?.title || pid,
+    size: sizeLabel, qty,
+    shipping: ship === 'inside' ? SITE.deliveryInsideLabel : SITE.deliveryOutsideLabel,
+    payment,
+    trxid: trxid || 'N/A',
+    total, note: note || 'নেই',
+  };
+
+  try {
+    const results = await Promise.allSettled([
+      sendGoogleForm(data),
+      sendTelegram(data),
+    ]);
+
+    // Check if at least one succeeded (Telegram CORS may fail from browser even if it works)
+    const tgResult  = results[1];
+    const gfResult  = results[0];
+
+    console.log('[Order] Google Form:', gfResult.status);
+    console.log('[Order] Telegram:', tgResult.status, tgResult.reason || '');
+
+    closeModal();
+    showSuccess(data);
+    resetForm();
+  } catch (err) {
+    toast('❌ সমস্যা হয়েছে, আবার চেষ্টা করুন', 'error');
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> অর্ডার কনফার্ম করুন';
+  }
+}
+
+/* ── Google Form ── */
+function sendGoogleForm(d) {
+  if (!CFG.googleFormAction || CFG.googleFormAction.includes('FORM_ID')) return Promise.resolve('skipped');
+  const fd = new FormData();
+  const f  = CFG.formFields;
+  fd.append(f.name, d.name); fd.append(f.phone, d.phone);
+  fd.append(f.address, d.address); fd.append(f.product, d.product);
+  fd.append(f.size, d.size); fd.append(f.qty, d.qty);
+  fd.append(f.shipping, d.shipping); fd.append(f.payment, d.payment);
+  fd.append(f.trxid, d.trxid); fd.append(f.total, d.total);
+  fd.append(f.note, d.note);
+  return fetch(CFG.googleFormAction, { method:'POST', body:fd, mode:'no-cors' });
+}
+
+/* ── Telegram ──
+   ✅ Proxy (Google Apps Script) থাকলে সেটা ব্যবহার করে
+   না থাকলে direct Telegram API call করে (fallback)
+   Proxy সেটআপ: CFG.telegramProxyUrl দেখুন             */
+async function sendTelegram(d) {
+  if (!CFG.telegramToken || CFG.telegramToken.includes('YOUR_')) return Promise.resolve('skipped');
+
+  const now = new Date().toLocaleString('bn-BD', { timeZone:'Asia/Dhaka' });
+
+  const msg = [
+    '🛍️ *নতুন অর্ডার!*',
+    `🕐 ${now}`,
+    '━━━━━━━━━━━━━━━━━━',
+    `👤 *নাম:* ${esc(d.name)}`,
+    `📱 *ফোন:* ${esc(d.phone)}`,
+    `📍 *ঠিকানা:* ${esc(d.address)}`,
+    '━━━━━━━━━━━━━━━━━━',
+    `📦 *পণ্য:* ${esc(d.product)}`,
+    `📏 *সাইজ:* ${esc(d.size)}`,
+    `🔢 *পরিমাণ:* ${d.qty}`,
+    `🚚 *ডেলিভারি:* ${esc(d.shipping)}`,
+    '━━━━━━━━━━━━━━━━━━',
+    `💳 *পেমেন্ট:* ${esc(d.payment)}`,
+    `🔑 *TrxID:* ${esc(d.trxid)}`,
+    `💰 *মোট:* ${esc(d.total)}`,
+    d.note !== 'নেই' ? `📝 *নোট:* ${esc(d.note)}` : '',
+    '━━━━━━━━━━━━━━━━━━',
+  ].filter(Boolean).join('\n');
+
+  const payload = {
+    token:      CFG.telegramToken,
+    chat_id:    CFG.telegramChatId,
+    text:       msg,
+    parse_mode: 'Markdown',
+  };
+
+  /* ── Method 1: Google Apps Script Proxy (সব browser কাজ করে) ── */
+  if (CFG.telegramProxyUrl && CFG.telegramProxyUrl.startsWith('http')) {
+    try {
+      const res = await fetch(CFG.telegramProxyUrl, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      });
+      const json = await res.json();
+      if (json.ok) { console.log('[Telegram] Proxy সফল ✅'); return json; }
+      throw new Error(json.description || 'Proxy error');
+    } catch (proxyErr) {
+      console.warn('[Telegram] Proxy ব্যর্থ, direct চেষ্টা করছে:', proxyErr.message);
+      /* Proxy fail হলে direct-এ fallback */
+    }
+  }
+
+  /* ── Method 2: Direct Telegram API call (fallback) ── */
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${CFG.telegramToken}/sendMessage`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
+        chat_id:    CFG.telegramChatId,
+        text:       msg,
+        parse_mode: 'Markdown',
+      }),
+    });
+    const json = await res.json();
+    if (json.ok) { console.log('[Telegram] Direct API সফল ✅'); return json; }
+    throw new Error(json.description || 'Direct API error');
+  } catch (directErr) {
+    /* Direct fail হলেও Order সফল দেখাবে — Google Form-এ data গেছে */
+    console.warn('[Telegram] Direct API ব্যর্থ:', directErr.message);
+    console.warn('[Telegram] ⚠️ Proxy URL সেট করুন (CFG.telegramProxyUrl)');
+    return Promise.resolve('telegram_failed_but_order_saved');
+  }
+}
+
+// Telegram markdown escape
+function esc(t) { return String(t).replace(/[_*[\]()~`>#+\-=|{}.!]/g, '\\$&'); }
+
+/* ── Reset ── */
+function resetForm() {
+  ['f-name','f-phone','f-address','f-trxid','f-note'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('f-qty').value = '1';
+  document.getElementById('f-product').value = '';
+  document.getElementById('f-size').innerHTML = '<option value="">-- প্রথমে পণ্য সিলেক্ট করুন --</option>';
+  document.getElementById('pay-cod').checked = true;
+  document.getElementById('sh-in').checked   = true;
+  document.getElementById('trx-sec').classList.add('hidden');
+  document.getElementById('bkash-info').classList.remove('show');
+  document.getElementById('nagad-info').classList.remove('show');
+  calcTotal();
+}
+
+/* ════════════════════════════════
+   SUCCESS SCREEN
+════════════════════════════════ */
+function showSuccess(d) {
+  const box = document.getElementById('order-summary-box');
+  box.innerHTML = `
+    <div class="text-gray-400 flex justify-between"><span>পণ্য</span><span class="text-white font-semibold">${d.product} (${d.size})</span></div>
+    <div class="text-gray-400 flex justify-between"><span>পরিমাণ</span><span class="text-white">${d.qty}</span></div>
+    <div class="text-gray-400 flex justify-between"><span>পেমেন্ট</span><span class="text-white">${d.payment}</span></div>
+    <div class="text-gray-400 flex justify-between border-t border-white/10 pt-2 mt-1"><span class="font-bold">মোট</span><span class="gt font-bold text-base">${d.total}</span></div>`;
+  document.getElementById('sscreen').classList.add('open');
+}
+function closeSuccess() { document.getElementById('sscreen').classList.remove('open'); }
+
+/* ════════════════════════════════
+   TOAST
+════════════════════════════════ */
+let _toastT;
+function toast(msg, type='info') {
+  const el = document.getElementById('toast');
+  const c  = { warn:'#f97316', error:'#ef4444', info:'#22c55e', ok:'#22c55e' };
+  el.style.borderColor = c[type] || c.info;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(_toastT);
+  _toastT = setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+/* ════════════════════════════════
+   FADE UP
+════════════════════════════════ */
+function initFadeUp() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fu').forEach(el => { el.classList.remove('vis'); obs.observe(el); });
+}
+
+/* ════════════════════════════════
+   NAV SCROLL
+════════════════════════════════ */
+function initNavScroll() {
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 55);
+  });
+}
+</script>
+
+</body>
+</html>
